@@ -1,18 +1,19 @@
-dict1=dict(('()','{}','[]'))
 par = '({['
 ver = '({}[])'
 
 def valid(par):
-    res = []
-    v = ''
+    dict1 = {'(': ')', '{': '}', '[': ']'} 
+    stack = []
+
     for i in par:
         if i in dict1:
-            v += dict1[i]
-        
-        if i == v:
-            res.append(i)
-    
-    return bool(res)
+            stack.append(dict1[i])
+        elif stack and i == stack[-1]:
+            stack.pop()
+        else:
+            return False
+    return not stack
+
 
 p = valid(ver)
 print(p)
